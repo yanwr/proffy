@@ -1,0 +1,123 @@
+#landing-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-in-primary);
+    background-color: var(--color-primary);
+}
+
+
+.image-landing {
+    width: 100%;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+.logo-container img {
+    height: 10rem;
+}
+.logo-container h2 {
+    font-weight: 500;
+    font-size: 2.4rem;
+    line-height: 4.6rem;
+    margin-top: 0.8rem;
+}
+
+.btns-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.2rem 0;
+}
+.btns-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30rem;
+    height: 10.4rem;
+    border-radius: 0.8rem;
+    font: 700 2.0rem Archivo;
+    text-decoration: none;
+    color: var(--color-button-text);
+    transition: background-color 0.2s;
+}
+.btns-container a:first-child {
+    margin-right: 1.6rem;
+}
+.btns-container a.study-btn {
+    background-color: var(--color-primary-lighter);
+}
+.btns-container a.give-classes-btn {
+    background-color: var(--color-secundary);
+}
+.btns-container a.study-btn:hover {
+    background-color: var(--color-primary-light);
+}
+.btns-container a.give-classes-btn:hover {
+    background-color: var(--color-secundary-dark);
+}
+.btns-container a img {
+    width: 4rem;
+}
+
+.total-connections-container {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.total-connections-container img {
+    margin-left: 0.8rem;
+}
+
+@media(min-width: 1100px) {
+
+    #landing-content {
+        max-width: 1100px;
+        display: grid;
+        grid-template-rows: 350px 1fr;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-areas: 
+            "logo landing-logo landing-logo"
+            "btns btns total-connections"
+        ;
+    }
+
+    .logo-container {
+        grid-area: logo;
+        align-self: center;
+        margin: 0;
+        text-align: left;
+    }
+    .logo-container img {
+        height: 100%;
+    }
+    .logo-container h2 {
+        text-align: initial;
+        font-size: 3.6rem;
+    }
+    
+    .image-landing {
+        grid-area: landing-logo;
+        justify-self: end;
+    }
+
+    .btns-container {
+        grid-area: btns;
+        justify-content: flex-start;
+    }
+    .btns-container a {
+        font-size: 2,4rem;
+    }
+    .btns-container a img {
+        margin-right: 2.4rem;
+    }
+
+    .total-connections-container {
+        grid-area: total-connections;
+        justify-self: end;
+    }
+}
