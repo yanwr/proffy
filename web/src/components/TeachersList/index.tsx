@@ -1,9 +1,10 @@
 import React from 'react';
+import Teacher from '../../models/Teacher';
 import TeachersListItem from './Item';
 import './styles.css'
 
 interface Props {
-    data: {}[];
+    data: Teacher[];
 };
 
 const TeachersListComponent: React.FC<Props> = (props) => {
@@ -11,7 +12,10 @@ const TeachersListComponent: React.FC<Props> = (props) => {
 
     function renderTeachersItens() {
         return data.map( item => (
-            <TeachersListItem data={item} />
+            <TeachersListItem 
+                key={item.id}
+                data={item} 
+            />
         ))
     };
 

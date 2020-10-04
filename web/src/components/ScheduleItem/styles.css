@@ -1,0 +1,10 @@
+@media(min-width: 700px) {
+    .schedule-item-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        column-gap: 1.6rem;
+    }
+    .schedule-item-container .input-container {
+        margin-top: 0 !important;
+    }
+}

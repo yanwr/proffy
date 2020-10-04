@@ -7,10 +7,11 @@ import goBackIcon from '../../assets/icons/back.svg';
 
 interface Props {
     title: string;
+    description?: string;
 };
 
 const NavHeaderComponent: React.FC<Props> = (props) => {
-    const { title } = props;
+    const { title, description } = props;
     return(
         <header className="header-container">
             <div className="top-bar-container">
@@ -21,6 +22,7 @@ const NavHeaderComponent: React.FC<Props> = (props) => {
             </div>
             <div className="header-content">
                 <strong>{title}</strong>
+                { description && <p>{description}</p>}
                 {props.children}
             </div>
         </header>
