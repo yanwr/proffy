@@ -9,36 +9,6 @@
 #search-teachers-container label {
     color: var(--color-text-in-primary);
 }
-#search-teachers-container .input-container {
-    position: relative;
-}
-#search-teachers-container .input-container + .input-container {
-    margin-top: 1.4rem;
-}
-#search-teachers-container .input-container label {
-    font-size: 1.4rem;
-}
-#search-teachers-container .input-container input {
-    width: 100%;
-    height: 5.6rem;
-    margin-top: 0.8rem;
-    border-radius: 0.8rem;
-    background: var(--color-input-bg);
-    border: 1px solid var(--color-line-in-white);
-    outline: 0;
-    padding: 0 1.6rem;
-    font: 1.6rem Archivo;
-}
-#search-teachers-container .input-container:focus-within::after {
-    width: calc(100% - 3.2rem);
-    height: 2px;
-    content: '';
-    background: var(--color-primary-light);
-    position: absolute;
-    left: 1.6rem;
-    right: 1.6rem;
-    bottom: 0;
-}
 
 #teacher-list-container main {
     margin: 3.2rem auto;
@@ -57,7 +27,9 @@
         position: absolute;
         bottom: -2.8rem;
     }
-    #search-teachers-container .input-container + .input-container {
+    
+    #search-teachers-container .input-container + .input-container,
+    #search-teachers-container .select-container + .select-container {
         margin-top: 0;
     }
 

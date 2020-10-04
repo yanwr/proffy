@@ -1,37 +1,39 @@
 import React from 'react';
+import { createConnection } from '../../services/ConnectionService';
+import Teacher from '../../models/Teacher';
 
 import wppIcon from '../../assets/icons/whatsapp.svg';
 
 interface Props {
-    data: {};
+    data: Teacher;
 }
 
-const TeachersListItem: React.FC<Props> = (props) => {
+const TeachersListItem: React.FC<Props> = ({ data }) => {
     return(
         <li>
             <article className="teacher-content">
                 <header>
-                    <img src="https://avatars0.githubusercontent.com/u/45368194?s=460&u=dad3bdb4e21c553141f8ce319c40f8fab8dfbdf0&v=4" alt="Yan Weschenfelder"/>
+                    <img src={data.avatar} alt={data.name}/>
                     <div>
-                        <strong>Yan Weschenfelder</strong>
-                        <span>Subject</span>
+                        <strong>{data.name}</strong>
+                        <span>{data.subject}</span>
                     </div>
                 </header>
                 <p>
-                    Uma textp bem grande aqui para ter coisas das porra aqui tudo ne ssa merda
-                    <br/>
-                    aaaaaa
-                    aaaaaaaa
+                    {data.bio}
                 </p>
                 <footer>
                     <p>
                         Hour/price
-                        <strong>$10,00</strong>
+                        <strong>${data.price}</strong>
                     </p>
-                    <button type="button">
+                    <a 
+                        onClick={() => createConnection(data.user_id)}
+                        href={`https://wa.me/${data.phone}`}
+                    >
                         <img src={wppIcon} alt="Whatsapp"/>
                         Come in call
-                    </button>
+                    </a>
                 </footer>
             </article>
         </li>

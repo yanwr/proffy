@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { loadTotalConnections } from '../../services/ConnectionService';
 import { Link } from 'react-router-dom';
 import './styles.css';
 
@@ -9,6 +10,15 @@ import giveClassesIcon from '../../assets/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/icons/purple-heart.svg';
 
 export default function LandingPage() {
+
+    const [totalConnection, setTotalConneciton] = useState<number | any>(0);
+
+    useEffect(() => {
+        loadTotalConnections()
+            .then(data => setTotalConneciton(data))
+            .catch(ex => setTotalConneciton(null));
+    }, []);
+
     return (
         <div id="landing-container">
             <div id="landing-content" className="container">
@@ -32,7 +42,7 @@ export default function LandingPage() {
                     </Link>
                 </div>
                 <span className="total-connections-container">
-                    Total of 200 connections <img src={purpleHeartIcon} alt="Purple Heart"/>
+                    Total of {totalConnection != null || undefined ? totalConnection : "..."} connections <img src={purpleHeartIcon} alt="Purple Heart"/>
                 </span>
             </div>
         </div>

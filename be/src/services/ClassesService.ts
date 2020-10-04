@@ -23,9 +23,13 @@ export default class ClassesService {
 
     async index() {
         try {
-            
+            const classes = await repository(CLASSES.table)
+                .join(USERS.table, CLASSES.column.user_id, "=", USERS.column.id)
+                .select([CLASSES.select.all, USERS.select.all]);
+            return classes;
         } catch (ex) {
-            
+            console.error(ex);
+            throw new Error;
         }
     };
     
