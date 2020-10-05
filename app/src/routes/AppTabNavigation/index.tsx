@@ -41,7 +41,9 @@ export default function AppTabNavigation() {
         component={TeacherScreen}
         options={{
           tabBarLabel: 'Proffys',
-          tabBarIcon: ({ color, size }) => (<Ionicons name="ios-easel" color={color} size={size}/>),
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name="ios-easel" color={focused ? '#8257E5' : color} size={size}/>
+          ),
         }}
       />
       <Screen 
@@ -49,7 +51,9 @@ export default function AppTabNavigation() {
         component={FavoriteScreen} 
         options={{
           tabBarLabel: 'Favorites',
-          tabBarIcon: ({ color, size }) => (<Ionicons name="ios-heart" color={color} size={size}/>),
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name="ios-heart" color={focused ? '#8257E5' : color} size={size}/>
+          ),
         }}
       />
     </Navigator>

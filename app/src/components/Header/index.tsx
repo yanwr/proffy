@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -6,21 +6,31 @@ import { useNavigation } from '@react-navigation/native';
 import leftArrowIcon from '../../assets/icons/back.png';
 import smallLogo from '../../assets/images/logo.png';
 
-export default function HeaderComponent(props:any) {
-  const { title } = props;
+interface Props {
+  title: string;
+  btnFilter?: ReactNode;
+};
+
+const HeaderComponent: React.FC<Props> = ({ title, children, btnFilter }) => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
         <BorderlessButton
-          onPress={() => navigation.goBack() }
+          onPress={() => navigation.navigate('landing') }
         >
           <Image source={leftArrowIcon} resizeMode="contain" />
         </BorderlessButton>
         <Image source={smallLogo} resizeMode="contain" />
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <View style={styles.content}>
+        <Text style={styles.title}>{title}</Text>
+        { btnFilter }
+      </View>
+      <View>
+        {children}
+      </View>
     </View>
   );
 };
@@ -35,6 +45,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'space-between'
   },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
   title: {
     fontFamily: 'Archivo700',
     color: '#FFF',
@@ -44,3 +59,5 @@ const styles = StyleSheet.create({
     marginVertical: 40
   }
 });
+
+export default HeaderComponent;

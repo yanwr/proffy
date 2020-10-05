@@ -1,10 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import HeaderComponent from "../../components/Header";
+import TeacherListComponent from "../../components/TeacherList";
 
 export default function FavoriteScreen(props:any) {
   return(
     <View style={styles.container}>
-      <Text> fAVORITE Screen </Text>
+      <HeaderComponent title="Favorites Proffys" />
+      <TeacherListComponent />
     </View>
   );
 };

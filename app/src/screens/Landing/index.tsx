@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { loadConnections } from '../../services/ConnectionService';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -9,6 +10,13 @@ import heartIcon from '../../assets/icons/heart.png';
 
 export default function LandingScreen(props:any) {
   const { navigation } = props;
+  const [totalConnection, setTotalConnection] = useState<number | any>(null);
+
+  useEffect(() => {
+    loadConnections()
+    .then(data => setTotalConnection(data))
+    .catch( ex => setTotalConnection(null));
+  }, []);
 
   function navigateTo(to:string) {
     navigation.navigate(to);
@@ -39,7 +47,7 @@ export default function LandingScreen(props:any) {
       </View>
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>
-          Total of 200 connections {' '}
+          Total of {totalConnection != null || undefined ? totalConnection : "..."} connections {' '}
         </Text>
         <Image source={heartIcon} />
       </View>
