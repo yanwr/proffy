@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadClasses } from "../../services/ClassesService";
+import { getFavoritesTeacherById, loadClasses, loadFavoritesTeachers } from "../../services/ClassesService";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { Feather } from '@expo/vector-icons';
@@ -9,20 +9,33 @@ import TeacherListComponent from "../../components/TeacherList";
 export default function TeacherScreen(props:any) {
   //console.log(props); // See if has to change opitionsBar here and not in AppTabNavigation
   const [showFilter, setShowFilter] = useState(false);
+  const [favoritesTeachers, setFavoritesTeachers] = useState<any>([]);
   const [classes, setClasses] = useState<[] | any>([]);
   const [filters, setFilters] = useState<{ weekDay:string, subject: string, time:string } | any>(null);
 
   useEffect(() => {
+    getFavoritesTeacherById().then( data => {
+      if(data){
+        setFavoritesTeachers(data);
+      }
+    })
+  }, []);
+
+  useEffect(() => {
+    handleLoadClasses();
+  }, []);
+
+  function handleLoadClasses() {
     loadClasses(filters)
     .then(data => setClasses(data))
     .catch(() => setClasses(null))
-  }, [filters]);
+  };
 
   return(
     <View style={styles.container}>
       <HeaderComponent 
         title="Available Proffys"
-        btnFilter={
+        btnShowFormFilter={
           <BorderlessButton
             onPress={() => setShowFilter(!showFilter)}
           >
@@ -60,13 +73,13 @@ export default function TeacherScreen(props:any) {
           </View>
           <RectButton 
             style={styles.btnSubmit}
-            onPress={() => {}}
+            onPress={handleLoadClasses}
           >
             <Text style={styles.btnSubmitTxt}>Filter</Text>
           </RectButton>
         </View> }
       </HeaderComponent>
-      <TeacherListComponent data={classes} />
+      <TeacherListComponent data={classes} favorites={favoritesTeachers} />
     </View>
   );
 };

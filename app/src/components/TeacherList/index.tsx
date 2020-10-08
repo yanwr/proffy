@@ -5,13 +5,18 @@ import TeacherItemComponent from './TeacherItem';
 
 interface Props {
 	data: Teacher[];
+	favorites: any[];
 };
 
-const TeacherListComponent: React.FC<Props> = ({ data }) => {
+const TeacherListComponent: React.FC<Props> = ({ data, favorites }) => {
 
 	function renderItens() {
 		return data.map( element => (
-			<TeacherItemComponent key={String(element.id)} item={element} />
+			<TeacherItemComponent 
+				key={String(element.id)}
+				item={element}
+				favorited={favorites.includes(element.id)}
+			/>
 		))
 	};
 

@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Teacher from '../../models/Teacher';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, StyleSheet, Text, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import heartOutlineIcon from '../../assets/icons/heart-outline.png';
 import unfavoriteIcon from '../../assets/icons/unfavorite.png';
 import whatsappIcon from '../../assets/icons/whatsapp.png';
+import { toggleFavoritesTeachers } from '../../services/ClassesService';
+import { createConneciton } from '../../services/ConnectionService';
 
 interface Props {
   item: Teacher;
+  favorited: boolean;
 };
 
-const TeacherItemComponent: React.FC<Props> = ({ item }) => {
+const TeacherItemComponent: React.FC<Props> = ({ item, favorited }) => {
+  const [isFavorite, setIsFavorite] = useState(favorited);
+
+  async function handleToggleFavoritesTeachers() {
+    if (isFavorite) {
+      setIsFavorite(false);
+      await toggleFavoritesTeachers(item);
+    } else {
+      setIsFavorite(true);
+      await toggleFavoritesTeachers(item, true);
+    }
+  };
+
+  async function openWhatsApp() {
+    await createConneciton(item.user_id);
+    Linking.openURL(`whatsapp://send?phone=${item.phone}`);
+  };
+
 	return(
 		<View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -38,13 +58,21 @@ const TeacherItemComponent: React.FC<Props> = ({ item }) => {
         </Text>
         <View style={styles.btnContainer}>
           <RectButton
-            style={[styles.btnFavorite, styles.itemFavorited]}
+            style={[
+              styles.btnFavorite,
+              isFavorite && styles.itemFavorited
+            ]}
+            onPress={handleToggleFavoritesTeachers}
           >
-            {/* <Image source={heartOutlineIcon}/> */}
-            <Image source={unfavoriteIcon}/>
+            {
+              isFavorite 
+                ? <Image source={unfavoriteIcon}/>
+                : <Image source={heartOutlineIcon}/>
+            }
           </RectButton>
           <RectButton
             style={styles.btnContact}
+            onPress={openWhatsApp}
           >
             <Image source={whatsappIcon}/>
             <Text style={styles.contactTxt}>Come in call</Text>

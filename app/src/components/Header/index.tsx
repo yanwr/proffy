@@ -8,10 +8,10 @@ import smallLogo from '../../assets/images/logo.png';
 
 interface Props {
   title: string;
-  btnFilter?: ReactNode;
+  btnShowFormFilter?: ReactNode;
 };
 
-const HeaderComponent: React.FC<Props> = ({ title, children, btnFilter }) => {
+const HeaderComponent: React.FC<Props> = ({ title, children, btnShowFormFilter }) => {
   const navigation = useNavigation();
 
   return (
@@ -26,7 +26,7 @@ const HeaderComponent: React.FC<Props> = ({ title, children, btnFilter }) => {
       </View>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
-        { btnFilter }
+        { btnShowFormFilter }
       </View>
       <View>
         {children}
