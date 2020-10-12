@@ -5,13 +5,13 @@ import { USERS } from './00_USER';
     export const CLASSES = {
         table: "classes",
         column: {
-            id: "classes.id",
-            subject: "classes.subject",
-            price: "classes.price",
-            user_id: "classes.user_id"
+          id: "classes.id",
+          subject: "classes.subject",
+          price: "classes.price",
+          user_id: "classes.user_id",
         },
         select: {
-            all: "classes.*"
+          all: "classes.*"
         }
     };
 //#endregion

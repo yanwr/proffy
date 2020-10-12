@@ -1,18 +1,24 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
-import TeacherRouterController from './controllers/TeacherController';
-import ClassesRouterController from './controllers/ClassesController';
-import ConnectionRouterController from './controllers/ConnectionsController';
+import AuthorizationRouter from './routes/AuthRoutes';
+import UserRouter from './routes/UserRoutes';
+import ClassesRouter from './routes/ClassesRoutes';
+import ConnectionRouter from './routes/ConnectionsRoutes';
+import ExceptionMiddlewares from './middlewares/ExceptionMiddlewares';
 
+dotenv.config();
 const APP = express();
 
 APP.use(cors());
 APP.use(express.json());
 APP.use([
-    TeacherRouterController, 
-    ClassesRouterController, 
-    ConnectionRouterController
+  AuthorizationRouter,
+	UserRouter, 
+	ClassesRouter, 
+	ConnectionRouter
 ]);
+APP.use(ExceptionMiddlewares);
 
 APP.listen(3333);
