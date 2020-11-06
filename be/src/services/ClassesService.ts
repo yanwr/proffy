@@ -14,16 +14,14 @@ export default class ClassesService {
 		const trxProvider = repository.transactionProvider();
 		try {
 			const repositoryTrx = await trxProvider();
-
-			const classes = { user_id, price, subject };
 			const classes_id = await repositoryTrx(CLASSES.table).insert({
-				user_id: classes.user_id,
-				price: classes.price,
-				subject: classes.subject
+				user_id,
+				price,
+				subject,
 			});
 
 			const classesSchudule = schedule
-				.map((x:ClassesSchedule) => ({ ...x, classes_id: classes_id[1] }));
+				.map((x:ClassesSchedule) => ({ ...x, classes_id: classes_id[0] }));
 			await this.classesScheduleService.create(classesSchudule, trxProvider);
 
 			(await trxProvider()).commit();

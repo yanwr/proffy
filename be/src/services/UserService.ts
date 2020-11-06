@@ -7,7 +7,6 @@ import User from '../models/User';
 export default class UserService {
   async index() {
     try {
-      throw new DataInvalidException('Fail to create new user');
       const users = await repository(USERS.table).select(USERS.select.all);
       return users;
     } catch (ex) {
